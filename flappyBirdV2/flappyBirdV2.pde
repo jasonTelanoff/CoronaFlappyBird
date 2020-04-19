@@ -16,7 +16,7 @@ PVector scorePos;
 
 void setup() {
   size(300, 600);
-  //frameRate(120000000);
+  frameRate(60);
 
   w = width;
   h = height;
@@ -36,7 +36,7 @@ void setup() {
 
   strokeWeight(5);
   textAlign(CENTER);
-  textSize(20);
+  textSize(30);
 }
 
 void draw() {
@@ -51,10 +51,10 @@ void draw() {
   if (birdPos.y >= height) {
     dead = true;
     birdPos.y = height;
-  } else if (birdPos.x > pipePos.x && birdPos.x < pipePos.x + pipeWidth) {
-    if (birdPos.y > pipePos.y + gapHeight) {
+  } else if (birdPos.x + birdSize/3 > pipePos.x && birdPos.x - birdSize/3 < pipePos.x + pipeWidth) {
+    if (birdPos.y + birdSize/3 > pipePos.y + gapHeight) {
       dead = true;
-    } else if (birdPos.y < pipePos.y) {
+    } else if (birdPos.y - birdSize/3 < pipePos.y) {
       dead = true;
     } else {
       in = true;
@@ -68,10 +68,13 @@ void draw() {
   stroke(200, 200, 0);
   circle(birdPos.x, birdPos.y, birdSize);
 
-  fill(0, 255, 0);
+  fill(0, 200, 0);
   stroke(0, 80, 0);
   rect(pipePos.x, -10, pipeWidth, pipePos.y+10);
   rect(pipePos.x, pipePos.y + gapHeight, pipeWidth, height);
+  
+  stroke(0, 255, 0);
+  line(0, height-2, width, height-2);
 
   fill(255);
   text(score, scorePos.x, scorePos.y);
